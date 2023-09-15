@@ -1,0 +1,43 @@
+@import "bootstrap/scss/bootstrap";
+
+.image {
+  height: 300px;
+  object-fit: cover;
+  margin-bottom: 20px;
+
+}
+.image3{
+  height: 600px;
+  object-fit: cover;
+}
+
+.dialogImage{
+  object-fit: cover;
+  height: 80vh;
+}
+
+dialog{
+  border: none;
+  outline: none;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(4px);
+}
+
+.hover-effect{
+  transition-duration: .5s;
+}
+
+.hover-effect:hover {
+  filter: brightness(40%);
+  transition-duration: .5s;
+  cursor: pointer;
+  filter: shadow(50px 50px 50px #000);
+}
+
+
+
+svg {
+  pointer-events: none;
+}
