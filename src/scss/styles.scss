@@ -41,3 +41,40 @@ dialog::backdrop {
 svg {
   pointer-events: none;
 }
+
+
+.slider {
+  display: flex;
+  overflow: hidden;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 0 5rem 0;
+}
+
+.slider-frame {
+  display: flex;
+  transition: transform 0.5s ease;
+  padding-left: 400px;
+}
+
+.slider img {
+  width: 400px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.slider img:focus {
+  transform: scale(1.5);
+}
+
+.sliderButtons > button {
+  background: none;
+  border: 1px solid black;
+}
+
+.sliderButtons > button:hover {
+  background-color: #fcce43;
+  border:none;
+}
+
