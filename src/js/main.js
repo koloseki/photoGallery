@@ -1,159 +1,39 @@
 import '../scss/styles.scss'
 
-import * as bootstrap from 'bootstrap'
+
+import gallery1Controller from './gallery1Controller.js'
+import updateSlider from "./gallery2Controller.js";
+import showImage from './gallery3Controller.js'
 
 
-let images = document.querySelectorAll('.image');
-let searchIcons = document.querySelectorAll('.SearchIcon');
-const dialog = document.querySelector("dialog")
+// container for thumbnails
+const thumbnailContainer = document.querySelector(".thumbnail_Container");
 
+// Loop through images 1-10 and create thumbnails
+for (let i = 1; i <= 10; i++) {
+    const thumbnailDiv = document.createElement("div");
+    thumbnailDiv.className = "thumbnail";
 
-images.forEach((image, index) => {
-    image.addEventListener("mouseenter", () => {
-        searchIcons[index].classList.remove("invisible");
-    });
+    const thumbnailImage = document.createElement("img");
+    thumbnailImage.src = "images/gallery3/image" + i + ".jpg";
+    thumbnailImage.alt = "Miniatura " + i;
+    thumbnailImage.width = 150;
+    thumbnailImage.height = 150;
 
-    image.addEventListener("mouseleave", () => {
-        searchIcons[index].classList.add("invisible");
-    });
-
-    image.addEventListener("click", () => {
-        const clickedImage = images[index];
-        const imageSrc = clickedImage.getAttribute("src");
-        const imageAlt = clickedImage.getAttribute("alt");
-
-        dialog.innerHTML = `
-            <img src="${imageSrc}" alt="${imageAlt}" class="dialogImage">
-        `;
-
-        dialog.showModal();
-    });
-});
-
-//Click outside dialog to close
-dialog.addEventListener("click", e => {
-    const dialogDimensions = dialog.getBoundingClientRect()
-    if (
-        e.clientX < dialogDimensions.left ||
-        e.clientX > dialogDimensions.right ||
-        e.clientY < dialogDimensions.top ||
-        e.clientY > dialogDimensions.bottom
-    ) {
-        dialog.close()
-    }
-})
-
-
-
-
-
-const sliderFrame = document.querySelector(".slider-frame");
-const imagesSlider = document.querySelectorAll(".slider img");
-const prevButton = document.querySelector(".prev-button");
-const nextButton = document.querySelector(".next-button");
-
-let currentIndex = 2; // Indeks zdjęcia na środku
-
-
-
-
-// Previous button
-nextButton.addEventListener("click", () => {
-    if (currentIndex < imagesSlider.length - 1) {
-        currentIndex++;
-        updateSlider();
-    }
-});
-
-// Next button
-prevButton.addEventListener("click", () => {
-    if (currentIndex > 0) {
-        currentIndex--;
-        updateSlider();
-    }
-});
-
-
-
-
-
-
-// Function to update the slider
-function updateSlider() {
-
-    // Width of the single image
-    const imageWidth = imagesSlider[0].clientWidth;
-    // Moving the slider frame
-    const translateValue = -currentIndex * imageWidth;
-
-    sliderFrame.style.transform = `translateX(${translateValue}px)`;
-
-    // Scaling the images
-    imagesSlider.forEach((image, index) => {
-        const distanceFromCenter = Math.abs(index - currentIndex);
-        const scaleFactor = distanceFromCenter === 0 ? 1.2 : 1 / (distanceFromCenter * 0.2 + 1); // Ustawienie skalowania
-        image.style.transform = `scale(${scaleFactor})`;
-    });
-
-    // Making the center image z-index higher than the others
-    imagesSlider.forEach((image, index) => {
-        const distanceFromCenter = Math.abs(index - currentIndex);
-        const scaleFactor = distanceFromCenter === 0 ? 1.2 : 1 / (distanceFromCenter * 0.2 + 1); // Ustawienie skalowania
-
-        image.style.transform = `scale(${scaleFactor})`;
-
-        if (distanceFromCenter === 0) {
-            image.style.zIndex = 1; // Center image on top
-        } else {
-            image.style.zIndex = 0; // The rest of the images below
-        }
-    });
-
-    imagesSlider.forEach((image, index) => {
-        const distanceFromCenter = Math.abs(index - currentIndex);
-        const isLeft = index < currentIndex;
-        const isRight = index > currentIndex;
-
-        // Ustawienie klasy CSS na zdjęciach po lewej stronie
-        if (isLeft) {
-            image.classList.add('left-image');
-            image.classList.remove('right-image');
-        } else {
-            image.classList.remove('left-image');
-        }
-
-        // Ustawienie klasy CSS na zdjęciach po prawej stronie
-        if (isRight) {
-            image.classList.add('right-image');
-            image.classList.remove('left-image');
-        } else {
-            image.classList.remove('right-image');
-        }
-    });
+    thumbnailDiv.appendChild(thumbnailImage);
+    thumbnailContainer.appendChild(thumbnailDiv);
 }
 
-// Obsługa kliknięcia na zdjęcie po prawej stronie
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains('right-image')) {
-        currentIndex++;
-        updateSlider();
-    }
-});
-
-// Obsługa kliknięcia na zdjęcie po lewej stronie
-document.addEventListener("click", (e) => {
-    if (e.target.classList.contains('left-image')) {
-        currentIndex--;
-        updateSlider();
-    }
-});
 
 
-
-
-
-
+// Call function gallery1Controller
+gallery1Controller();
 
 // Initialize slider
 updateSlider();
+
+// Call function showImage with index of image to show
+showImage(1);
+
+
 
