@@ -15,7 +15,7 @@ for (let i = 1; i <= 10; i++) {
     thumbnailDiv.className = "thumbnail";
 
     const thumbnailImage = document.createElement("img");
-    thumbnailImage.src = "images/gallery3/image" + i + ".jpg";
+    thumbnailImage.src = "gallery3/image" + i + ".jpg";
     thumbnailImage.alt = "Miniatura " + i;
     thumbnailImage.width = 150;
     thumbnailImage.height = 150;

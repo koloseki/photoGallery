@@ -36,7 +36,7 @@ function showImage(imageNumber) {
     }
 
     // actualize the full image
-    fullImage.src = "images/gallery3/image" + imageNumber + ".jpg";
+    fullImage.src = "gallery3/image" + imageNumber + ".jpg";
 
     // actualize the description
     description.textContent = "Galeria zdjęcie " + imageNumber;
